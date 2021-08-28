@@ -7,8 +7,8 @@ export class Order {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  orders: [];
+  @Column('jsonb', {nullable: true})
+  orders: object[];
 
   @Column()
   total: number;
