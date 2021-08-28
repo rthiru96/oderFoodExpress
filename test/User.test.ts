@@ -1,7 +1,7 @@
 import { Application } from 'express';
 import { assert } from 'chai';
-import { User } from '../src/entity/User';
-import { userInterface } from '../src/interface/order.interface';
+import { Order } from '../src/entity/order';
+import { IOrder } from '../src/interface/order.interface';
 import { createConnection, getConnectionOptions } from 'typeorm';
 import supertest from 'supertest';
 import { Server } from '../src/server';
@@ -21,39 +21,39 @@ before(async () => {
 // import 'module-alias/register';
 
 describe('Testing user component', () => {
-  const testUser: userInterface = User.mockTestBoard();
-  let testUserModified: userInterface;
+  const testOrder: IOrder = Order.mockTestBoard();
+  let testOrderModified: IOrder;
 
-  describe('POST /users', () => {
+  describe('POST /order', () => {
     it('responds with status 400', (done) => {
       supertest(app)
-        .post('/users')
+        .post('/order')
         .send()
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(400, done());
     });
 
-    it('responds with new user', (done) => {
+ 
+    it('responds with new order', (done) => {
       supertest(app)
-        .post('/users')
-        .send(testUser)
+        .post('/order')
+        .send(testOrder)
         .set('Accept', 'application/json')
         // .expect('Content-Type', /json/)
         .end((err, res) => {
           try {
             if (err) throw err;
             const status = res.statusCode;
-            const user: User = res.body;
+            const order: Order = res.body;
             // Assert status
             assert(status === res.status, 'status does not match');
 
             // Assert user
-            assert.isObject(user, 'user should be an object');
-            assert(user.firstName === testUser.firstName, 'userFirstname does not match');
-            assert(user.lastName === testUser.lastName, 'userLastname does not match');
-            assert(user.age === testUser.age, 'age does not match');
-            testUserModified = user;
+            assert.isObject(order, 'user should be an object');
+            assert(order.orders === testOrder.orders, 'orders does not match');
+            assert(order.total === testOrder.total, 'total does not match');
+            testOrderModified = order;
             return done();
           } catch (err) {
             return done(err);
@@ -62,10 +62,10 @@ describe('Testing user component', () => {
     });
   });
 
-  describe('GET /users', () => {
+  describe('GET /order', () => {
     it('responds with user array', (done) => {
       supertest(app)
-        .get('/users')
+        .get('/order')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200)
@@ -74,17 +74,15 @@ describe('Testing user component', () => {
             if (err) throw err;
 
             const status = res.statusCode;
-            const users: User[] = res.body;
+            const orders: IOrder[] = res.body;
 
             // Assert status
             assert(status === res.status, 'status does not match');
 
             // Assert users
-            assert.isArray(users, 'users should be an array');
-            assert(users[0].firstName === testUser.firstName, 'userFirstname does not match');
-            assert(users[0].lastName === testUser.lastName, 'userLastname does not match');
-            assert(users[0].age === testUser.age, 'userLastname does not match');
-
+            assert.isArray(orders, 'orders should be an array');
+            assert(orders[0].orders === testOrder.orders, 'orders does not match');
+            assert(orders[0].total === testOrder.total, 'total does not match');
             return done();
           } catch (err) {
             return done(err);
@@ -93,27 +91,25 @@ describe('Testing user component', () => {
     });
   });
 
-  describe('GET /users/:id', () => {
-    it('responds with single user', (done) => {
+  describe('GET /order/:id', () => {
+    it('responds with single order', (done) => {
       supertest(app)
-        .get(`/users/${testUserModified.id}`)
+        .get(`/order/${testOrderModified.id}`)
         .set('Accept', 'application/json')
         .end((err, res) => {
           try {
             if (err) throw err;
 
             const status = res.statusCode;
-            const user: User = res.body;
+            const orders: IOrder[] = res.body;
 
             // Assert status
             assert(status === res.statusCode, 'status does not match');
 
             // Assert user
-            assert.isObject(user, 'user should be an object');
-            assert(user.id === testUserModified.id, 'userID does not match');
-            assert(user.firstName === testUserModified.firstName, 'userFirstname does not match');
-            assert(user.lastName === testUserModified.lastName, 'userLastname does not match');
-            assert(user.age === testUser.age, 'userLastname does not match');
+            assert.isObject(orders, 'order should be an object');
+            assert(orders.orders === testOrderModified.orders, 'oders does not match');
+            assert(orders.total === testOrderModified.total, 'total does not match');
 
             return done();
           } catch (err) {
@@ -123,10 +119,10 @@ describe('Testing user component', () => {
     });
   });
 
-  describe('DELETE /users/1', () => {
+  describe('DELETE /order/1', () => {
     it('responds with status 204', (done) => {
       supertest(app)
-        .delete(`/users/${testUserModified.id}`)
+        .delete(`/order/${testOrderModified.id}`)
         .set('Accept', 'application/json')
         .end((err, res) => {
           try {
@@ -146,7 +142,7 @@ describe('Testing user component', () => {
 
     it('responds with status 404', (done) => {
       supertest(app)
-        .delete(`/users/${testUserModified.id}`)
+        .delete(`/oder/${testOrderModified.id}`)
         .end((err, res) => {
           try {
             if (err) throw err;
