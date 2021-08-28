@@ -5,6 +5,7 @@ import { createServer, Server as HttpServer } from 'http';
 import { Application } from 'express';
 import { Server } from './server';
 import { dbConnection } from './dbServer';
+import * as swaggerDocument from "./swagger.json";
 
 let retries = 5;
 async function createDbConection() {

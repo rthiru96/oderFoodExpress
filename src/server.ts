@@ -9,6 +9,8 @@ import { errorHandler } from './common/errorValidation/error';
 import { NotFoundError } from './common/errorValidation/errors';
 import { validationRules } from './common/validations';
 import { validateRequest } from './common/validations/validateRequest';
+import swaggerUi from "swagger-ui-express";
+import * as swaggerDocument from "./swagger.json";
 
 const fileUpload = multer();
 
@@ -17,6 +19,7 @@ export function initMiddleWare(app): void {
   app.use(helmet());
   app.use(bodyParser.json());
   app.use(morgan('combined'));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));     
 
   Routes.forEach((route) => {
     app[route.method](

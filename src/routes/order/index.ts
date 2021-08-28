@@ -12,25 +12,25 @@ interface OrderRoutesInterface extends RouteInterface {
 export const OrderRoutes: OrderRoutesInterface[] = [
   {
     method: 'get',
-    route: '/orders',
+    route: '/order',
     controller: OrderController,
     action: 'all',
   },
   {
     method: 'get',
-    route: '/orders/:id',
+    route: '/order/:id',
     controller: OrderController,
     action: 'one',
   },
   {
     method: 'post',
-    route: '/orders',
+    route: '/order',
     controller: OrderController,
     action: 'save',
   },
   {
     method: 'delete',
-    route: '/oders/:id',
+    route: '/oder/:id',
     controller: OrderController,
     action: 'remove',
   },
