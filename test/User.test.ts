@@ -91,33 +91,7 @@ describe('Testing user component', () => {
     });
   });
 
-  describe('GET /order/:id', () => {
-    it('responds with single order', (done) => {
-      supertest(app)
-        .get(`/order/${testOrderModified.id}`)
-        .set('Accept', 'application/json')
-        .end((err, res) => {
-          try {
-            if (err) throw err;
 
-            const status = res.statusCode;
-            const orders: IOrder[] = res.body;
-
-            // Assert status
-            assert(status === res.statusCode, 'status does not match');
-
-            // Assert user
-            assert.isObject(orders, 'order should be an object');
-            assert(orders.orders === testOrderModified.orders, 'oders does not match');
-            assert(orders.total === testOrderModified.total, 'total does not match');
-
-            return done();
-          } catch (err) {
-            return done(err);
-          }
-        });
-    });
-  });
 
   describe('DELETE /order/1', () => {
     it('responds with status 204', (done) => {
