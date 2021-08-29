@@ -65,7 +65,11 @@ Response
 ]
 
 
-b. Get All Orders => http://localhost:4000/order.
+b. Get All Orders => http://localhost:4000/order
+
+To run mocha tests => npm run test
+
+To view swaggerUI => http://localhost:4000/swagger
 
 
 ```

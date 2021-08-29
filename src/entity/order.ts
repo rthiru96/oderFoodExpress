@@ -16,17 +16,17 @@ export class Order {
 
   public static mockTestBoard(): IOrder {
     const order: Order = {} as IOrder;
-    order.id = 'ODR1';
+ 
     order.orders = <any>[{
-        id:"ITM002",
-        itemName:"Pizza",
+        id:"ITM007",
         qty:2,
         price:20,
+        itemName:"Pizza"
       },{
-        id:"ITM003",
-        itemName:"Pie",
+        id:"ITM009",
         qty:3,
         price:40,
+        itemName:"Pie"
       }];
     order.total = 200;
     return order;
