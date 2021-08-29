@@ -2,8 +2,8 @@
 ## Getting started
 
 ```
-npm install
-npm run dev
+To install node Modules => npm install
+To run application => npm run dev
 
 a. Create an order
 =======================
