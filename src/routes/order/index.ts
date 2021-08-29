@@ -1,9 +1,6 @@
 import { RouteInterface } from '..';
 import { OrderController } from '../../controller/order.controller';
 
-// upload file using multer like this
-// import multer from 'multer';
-// const fileUpload = multer();
 
 interface OrderRoutesInterface extends RouteInterface {
   controller: typeof OrderController;

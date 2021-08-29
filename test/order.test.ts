@@ -2,7 +2,6 @@ import { Application } from 'express';
 import { assert,expect } from 'chai';
 import { Order } from '../src/entity/order';
 import { IOrder } from '../src/interface/order.interface';
-import { createConnection, getConnectionOptions } from 'typeorm';
 import supertest from 'supertest';
 import { Server } from '../src/server';
 import { dbConnection } from '../src/dbServer';
@@ -21,7 +20,7 @@ before(async () => {
     console.log(err);
   }
 });
-// import 'module-alias/register';
+
 
 describe('Testing user component', () => {
   const testOrder: IOrder = Order.mockTestBoard();

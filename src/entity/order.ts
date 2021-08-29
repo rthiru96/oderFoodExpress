@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { IOrder } from '../interface/order.interface';
-import { IItem } from '../interface/item.interface';
+
 
 @Entity()
 export class Order {

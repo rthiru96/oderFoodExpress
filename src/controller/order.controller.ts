@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { Order } from '../entity/order';
 import { NotFoundError } from '../common/errorValidation/errors';
 
-// import { streamUpload } from '../utils/mediaUpload';
+
 
 export class OrderController {
   private oderRepository = getRepository(Order);
@@ -17,15 +17,13 @@ export class OrderController {
 
   async save(request: Request) {
     try {
-      // if uploading a file
-      // const mediaUpload = await streamUpload(request);
       return this.oderRepository.save(request.body);
     } catch (err) {
       throw err;
     }
   }
 
-  // using query builder <createQueryBuilder>
+ 
   async remove(request: Request, response: Response) {
     try {
       const data = await this.oderRepository
